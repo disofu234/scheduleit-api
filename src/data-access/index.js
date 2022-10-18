@@ -1,9 +1,9 @@
 const { MongoClient } = require('mongodb');
-const makeRoomsDb = require('./rooms-db');
+const makeEventsDb = require('./events-db');
 
-const uri = 'mongodb+srv://scheduleit-dev:Dd(Amd5-{m>,Uq42@cluster0.29gek.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+const uri = 'mongodb+srv://scheduleit-dev:Dd(Amd5-{m>,Uq42@cluster0.29gek.mongodb.net/scheduleit-db?retryWrites=true&w=majority';
 const dbName = 'scheduleit-db';
-const client = new MongoClient(uri, { useUnifiedTopology: true });
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 async function makeDb() {
   console.log('Connecting to database...')
@@ -14,5 +14,5 @@ async function makeDb() {
   return client.db(dbName);
 };
 
-const roomsDb = makeRoomsDb(makeDb);
-module.exports = roomsDb;
+const eventsDb = makeEventsDb(makeDb);
+module.exports = eventsDb;

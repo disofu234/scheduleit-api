@@ -1,11 +1,8 @@
-const buildMakeRoom = require('./room');
-const Hashes = require('jshashes');
-const { cloneDeep } = require('lodash');
+const buildMakeEvent = require('./event');
+const { DateTime } = require("luxon")
 
-const md5 = new Hashes.MD5;
-
-const makeRoom = buildMakeRoom(md5.hex, cloneDeep);
+const makeEvent = buildMakeEvent(DateTime);
 
 module.exports = {
-  makeRoom
+  makeEvent
 };

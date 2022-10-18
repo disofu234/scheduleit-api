@@ -1,26 +1,22 @@
-module.exports = function makeExpressCallback (controller) {
+module.exports = function expressCallback (controller) {
   return (req, res) => {
     const httpRequest = {
       body: req.body,
       query: req.query,
-      params: req.params,
-      ip: req.ip,
-      method: req.method,
-      path: req.path,
-      headers: {
-        'Content-Type': req.get('Content-Type'),
-        Referer: req.get('referer'),
-        'User-Agent': req.get('User-Agent')
-      }
+      params: req.params
     };
+    
     controller(httpRequest)
-      .then(httpResponse => {
-        if (httpResponse.headers) {
-          res.set(httpResponse.headers)
-        };
+      .then(resBody => {
+        res.set({
+          'Content-Type': 'application/json'
+        })
         res.type('json');
-        res.status(httpResponse.statusCode).send(httpResponse.body);
+        res.status(200).send(resBody);
       })
-      .catch(e => res.status(500).send({ error: 'An unkown error occurred.' }));
+      .catch(e => {
+        console.log(e)
+        res.status(400).send({ error: 'An error occurred.' })
+      });
   };
 };

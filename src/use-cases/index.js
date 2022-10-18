@@ -1,20 +1,14 @@
-const roomsDb = require('@data-access');
-const makeFetchRoom = require('./fetch-room');
-const makeFetchAvailability = require('./fetch-availability');
-const makeModifyAvailability = require('./modify-availability');
-const makeCreateRoom = require('./create-room');
-const makeFetchRoomWithAuth = require('./fetch-room-with-auth');
+const eventsDb = require('@data-access');
+const makeCreateEvent = require('./create-event');
+const makeGetEvent = require('./get-event')
+const makeUpdateParticipant = require('./update-participant.js');
 
-const fetchRoom = makeFetchRoom(roomsDb);
-const fetchAvailability = makeFetchAvailability(roomsDb);
-const modifyAvailability = makeModifyAvailability(roomsDb);
-const createRoom = makeCreateRoom(roomsDb);
-const fetchRoomWithAuth = makeFetchRoomWithAuth(roomsDb);
+const createEvent = makeCreateEvent(eventsDb);
+const getEvent = makeGetEvent(eventsDb)
+const updateParticipant = makeUpdateParticipant(eventsDb)
 
-module.exports = { 
-  fetchRoom,
-  fetchRoomWithAuth,
-  fetchAvailability,
-  modifyAvailability,
-  createRoom
+module.exports = {
+  createEvent,
+  getEvent,
+  updateParticipant,
 };
