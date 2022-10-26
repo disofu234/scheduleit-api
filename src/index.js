@@ -11,6 +11,10 @@ const {
   updateParticipant,
 } = require('@use-cases');
 
+if (process.env.NODE_ENV != "production") {
+  require('dotenv').config()
+}
+
 const app = express();
 
 const port = 2000;
